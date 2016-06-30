@@ -1,0 +1,9 @@
+CACHE MANIFEST
+# AppCacheV1
+offline.jpg
+
+NETWORK
+*
+
+FALLBACK:
+/ offline.jpg
