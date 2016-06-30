@@ -1,7 +1,7 @@
 // Create service worker
 if ('serviceWorker' in navigator) {
 	// $$$$$ Change path and location for sw.js to propefly cache common files from the root
-	navigator.serviceWorker.register('/playground/miguel/protCache/sw.js').then(function(registration) {
+	navigator.serviceWorker.register('sw.js').then(function(registration) {
       // Registration was successful
     console.log('ServiceWorker registration successful with scope: ', registration.scope);
     if(registration.installing) {

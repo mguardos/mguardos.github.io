@@ -1,9 +1,9 @@
 // The files we want to cache
 var CACHE_NAME = 'protCache-V11';
 var urlsToCache = [
-  '/playground/miguel/protCache/indexSW.html',
-  '/playground/miguel/protCache/prot.js',
-  '/playground/miguel/protCache/offline.jpg'
+  'indexSW.html',
+  'prot.js',
+  'offline.jpg'
 ];
 
 // Set the callback for the install step
