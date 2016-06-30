@@ -1,0 +1,64 @@
+// The files we want to cache
+var CACHE_NAME = 'protCache-V11';
+var urlsToCache = [
+  '/playground/miguel/protCache/indexSW.html',
+  '/playground/miguel/protCache/prot.js',
+  '/playground/miguel/protCache/offline.jpg'
+];
+
+// Set the callback for the install step
+self.addEventListener('install', function(event) {
+    // Perform install steps
+    event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        console.log('Opened cache: ', CACHE_NAME);
+        return cache.addAll(urlsToCache);
+      })
+  );        
+});
+
+self.addEventListener('fetch', function(event) {
+  console.log("fetched request: ", event.request);    
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+      	console.log("caching match: ", response);
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
+        return fetch(event.request)
+          .catch(function(){
+            return caches.match('/playground/miguel/protCache/offline.jpg');
+            }
+          );
+          // .then(
+          //   function(response){
+          //     // Do something
+          //   }
+          // );
+      }
+    )
+  );
+});
+
+self.addEventListener('activate', function(event) {
+  var cacheWhitelist = [CACHE_NAME];
+
+  event.waitUntil(
+    caches.keys().then(function(keyList) {
+      return Promise.all(keyList.map(function(key) {
+        if (cacheWhitelist.indexOf(key) === -1) {
+          console.log("Deleting cache: ", CACHE_NAME, key)
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+});
+
+//self.addEventListener('push', function(event) {
+//  console.log('Push message received', event);
+  // TODO
+//});
