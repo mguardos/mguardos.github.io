@@ -7,13 +7,16 @@ var urlsToCache = [
 ];
 
 // Set the callback for the install step
-self.addEventListener('install', function(event) {
+self.addEventListener( 'install', function( event ){
     // Perform install steps
     event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('Opened cache: ', CACHE_NAME);
-        return cache.addAll(urlsToCache);
+    caches.open( CACHE_NAME )
+      .then( function( cache ) {
+        console.log( 'Opened cache: ', CACHE_NAME );
+        return cache.addAll( urlsToCache );
+      })
+      .then( function( ){
+        self.skipWaiting( );
       })
   );        
 });
@@ -30,7 +33,7 @@ self.addEventListener('fetch', function(event) {
         }
         return fetch(event.request)
           .catch(function(){
-            return caches.match('/playground/miguel/protCache/offline.jpg');
+            return caches.match('offline.jpg');
             }
           );
           // .then(
@@ -43,14 +46,15 @@ self.addEventListener('fetch', function(event) {
   );
 });
 
-self.addEventListener('activate', function(event) {
+self.addEventListener( 'activate', function( event ){
   var cacheWhitelist = [CACHE_NAME];
 
   event.waitUntil(
-    caches.keys().then(function(keyList) {
-      return Promise.all(keyList.map(function(key) {
-        if (cacheWhitelist.indexOf(key) === -1) {
-          console.log("Deleting cache: ", CACHE_NAME, key)
+    caches.keys( )
+      .then( function( keyList ){
+      return Promise.all( keyList.map( function( key ){
+        if ( cacheWhitelist.indexOf( key ) === -1 ){
+          console.log( "Deleting cache: ", CACHE_NAME, key );
           return caches.delete(key);
         }
       }));
