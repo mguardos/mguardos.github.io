@@ -1,5 +1,5 @@
 // The files we want to cache
-var CACHE_NAME = 'protCache-V12';
+var CACHE_NAME = 'protCache-V13';
 var urlsToCache = [
   'indexSW.html',
   'prot.js',
@@ -15,6 +15,8 @@ self.addEventListener( 'install', function( event ){
         console.log( 'Opened cache: ', CACHE_NAME );
         return cache.addAll( urlsToCache );
       })
+      // The following call will activate the new Service Worker immediately
+      // This seems obvious because if a new SW is available, it means there is connectivity and old cached files can be replaced
       .then( function( ){
         self.skipWaiting( );
       })
