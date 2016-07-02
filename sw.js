@@ -22,9 +22,9 @@ self.addEventListener( 'install', function( event ){
       .then( function( ){
         self.skipWaiting( );
       })
-      .catch( ){
+      .catch( function( ){
         console.log("Error skipWaiting");
-      }
+      })
   );        
 });
 
