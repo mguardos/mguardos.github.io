@@ -1,5 +1,7 @@
 // The files we want to cache
-var CACHE_NAME = 'protCache-V15';
+// Version 1
+
+var CACHE_NAME = 'protCache';
 var urlsToCache = [
   'indexSW.html',
   'prot.js',
@@ -20,6 +22,9 @@ self.addEventListener( 'install', function( event ){
       .then( function( ){
         self.skipWaiting( );
       })
+      .catch( ){
+        console.log("Error skipWaiting");
+      }
   );        
 });
 
