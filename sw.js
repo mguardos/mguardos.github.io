@@ -1,7 +1,7 @@
 // The files we want to cache
 // Version 2
 
-var CACHE_NAME = 'protCache';
+var CACHE_NAME = 'protCache1';
 var urlsToCache = [
   'indexSW.html',
   'prot.js',
