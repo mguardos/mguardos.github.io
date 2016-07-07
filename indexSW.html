@@ -24,16 +24,16 @@
           <button type="button" onclick="retrieveLocalStorage()">LocalStorage retrieve</button>
         </div>
       </fieldset>
-    </form>
       <fieldset>
         <legend>Indexed DB</legend>
             <label>Project: <select id="projectSel">
             </select></label>
         <div  style="padding:10px">
-          <button onclick="deleteIndexDB()">Delete IndexDB</button>
-          <button onclick="initializeSelect()">Initialize Select</button>
+          <button type="button" onclick="deleteIndexDB()">Delete IndexDB</button>
+          <button type="button" onclick="initializeSelect()">Fill Select (1.Network, 2.IndexDB)</button>
         </div>
       </fieldset>
+    </form>
   	<script src="./prot.js"></script>
     <script src="./indexDB.js"></script>
     <script src="https://mguardos.github.io/projectList.js"></script>
