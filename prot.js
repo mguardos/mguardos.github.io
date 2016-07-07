@@ -36,18 +36,10 @@ function saveLocalStorage( ) {
 
 function retrieveLocalStorage( ) {
   var data = JSON.parse(localStorage.getItem("dataLS"));
-  document.querySelector("input[name=numericField1]").value = data.hours;
-  document.querySelector("input[name=dateField1]").value = data.date;
-  document.querySelector("input[name=textField1]").value = data.comment;
+  if (data){
+    document.querySelector("input[name=numericField1]").value = data.hours || "0";
+    document.querySelector("input[name=dateField1]").value = data.date;
+    document.querySelector("input[name=textField1]").value = data.comment || "";
+  }
 }
 
-function saveIdb( ) {
-  console.log("Within saveOffline: ", this);
-  var data = {
-    id: "1",
-    hours: document.querySelector("input[name=numericField1]").value,
-    date: document.querySelector("input[name=dateField1]").value,
-    comment: document.querySelector("input[name=textField1]").value,
-  }
-  Storage.prototype.setObject( "data", data);
-}
