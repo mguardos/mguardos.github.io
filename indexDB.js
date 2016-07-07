@@ -138,10 +138,10 @@ request.onsuccess = function( event ) {
   // In case you want to support such an implementation, you can write: 
   // var transaction = db.transaction([dbStore], IDBTransaction.READ_WRITE);
   var objectStore = transaction.objectStore( dbStore );
+  iDBprjData = [];
   // Update application from database entries - if no connection
   objectStore.openCursor( ).onsuccess = function( event ) {
     var cursor = event.target.result;
-    iDBprjData = [];
     if ( cursor ) {
       iDBprjData.push( cursor.value );
       cursor.continue( );
