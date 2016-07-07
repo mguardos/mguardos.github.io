@@ -1,8 +1,8 @@
 CACHE MANIFEST
-# AppCacheV12
+# AppCacheV1
 offline.jpg
 
-NETWORK:
+NETWORK
 *
 
 FALLBACK:

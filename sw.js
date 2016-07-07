@@ -1,11 +1,12 @@
 // The files we want to cache
-const version = '2';
+const version = '18';
 
-var CACHE_NAME = 'protCache1';
+var CACHE_NAME = 'protCache';
 var urlsToCache = [
   'indexSW.html',
   'prot.js',
-  'offline.jpg'
+  'offline.jpg',
+  'indexDB.js'
 ];
 
 // Set the callback for the install step
@@ -59,13 +60,23 @@ self.addEventListener( 'activate', function( event ){
   event.waitUntil(
     caches.keys( )
       .then( function( keyList ){
-      return Promise.all( keyList.map( function( key ){
-        if ( cacheWhitelist.indexOf( key ) === -1 ){
-          console.log( "Deleting cache: ", CACHE_NAME, key );
-          return caches.delete(key);
-        }
-      }));
-    })
+        return Promise.all( keyList.map( function( key ){
+          if ( cacheWhitelist.indexOf( key ) === -1 ){
+            console.log( "Deleting cache: ", CACHE_NAME, key );
+            return caches.delete(key);
+          }
+        }));
+      })
+      .then( function( ){
+        // Commented line is suppoed to 'activate' all pages cached by the SW but did not seem to work
+        self.clients.claim( );
+        // Below line does not work either. Pending to identify how to refresh the page or make sure
+        // that all resources are properly up to date after updating the SW $$$$
+        //window.location.reload( true );
+      })
+      .catch( function( ){
+        console.log("error during activation");
+      })
   );
 });
 
