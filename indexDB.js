@@ -1,6 +1,7 @@
 const dbName = "bbTestDB",
   dbVersion = 3,
-  dbStore = "projects";
+  dbStore = "projects",
+  noIDBdata = { id: 0, text: "Not possible to retrieve information" };
 
 // Prototype variables
 var iDBprjData = [];
@@ -8,7 +9,7 @@ var iDBprjData = [];
 function initializeSelect(){
 	var prjData = getProjectsData();
 	if (!prjData || !prjData.length) {
-		prjData[0] = { id: 0, text: "Not possible to retrieve information" };
+		prjData[0] = noIDBdata;
 	}
 	updateSelect(prjData);
 };
@@ -33,6 +34,7 @@ function deleteIndexDB( ) {
   var request = objectStore.clear( );
   request.onsuccess = function( event ) {
     console.log( "objectStore cleared" );
+    updateSelect( [noIDBdata] );
   }
 
   transaction.oncomplete = function( event ){
