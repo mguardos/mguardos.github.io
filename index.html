@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="author" content="BeeBole">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="theme-color" content="#536878" />
+    <link rel=manifest href="manifest.json">
+    <!-- Your app title -->
+    <title>Prototype - Cache</title>
+  </head>
+  <body onload="retrieveLocalStorage()">
+  	<h1>Loading big image below</h1>
+    <img src="cactus.jpg" width="300" height="300">
+    <form name="daysForm" style="padding:10px">
+      <fieldset>
+        <legend>Local Storage</legend>
+        <label>Comment: <input type="text" name="textField1"></label>
+        <label>Hours: <input type="number" name="numericField1"></label>
+        <label>Date: <input type="date" name="dateField1"></label>
+        <div  style="padding:10px">
+          <button type="button" onclick="daysForm.reset()">Clean form</button>
+          <button type="button" onclick="saveLocalStorage()">LocalStorage save</button>
+          <button type="button" onclick="retrieveLocalStorage()">LocalStorage retrieve</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Indexed DB</legend>
+            <label>Project: <select id="projectSel">
+            </select></label>
+        <div  style="padding:10px">
+          <button type="button" onclick="deleteIndexDB()">Delete IndexDB</button>
+          <button type="button" onclick="initializeSelect()">Fill Select (1.Network, 2.IndexDB)</button>
+        </div>
+      </fieldset>
+    </form>
+  	<script src="./combined.js"></script>
+    <script src="./indexDB.js"></script>
+    <script src="https://mguardos.github.io/projectList.js"></script>
+    <!--script src="./projectList.js"></script-->
+	</body>
+</html>
