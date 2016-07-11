@@ -1,6 +1,9 @@
 CACHE MANIFEST
-# AppCacheV3
+# AppCacheV4
+index.html
+combined.js
 offline.jpg
+logo.png
 
 NETWORK
 *

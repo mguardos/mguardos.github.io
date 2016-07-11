@@ -1,10 +1,10 @@
 // The files we want to cache
-const version = '18';
+const version = '19';
 
 var CACHE_NAME = 'protCache';
 var urlsToCache = [
-  'indexSW.html',
-  'prot.js',
+  'index.html',
+  'combined.js',
   'offline.jpg',
   'indexDB.js'
 ];
@@ -15,7 +15,7 @@ self.addEventListener( 'install', function( event ){
     event.waitUntil(
     caches.open( CACHE_NAME )
       .then( function( cache ) {
-        console.log( 'Opened cache: ', CACHE_NAME );
+        showMsg( 'Opened cache: ', CACHE_NAME );
         return cache.addAll( urlsToCache );
       })
       // The following call will activate the new Service Worker immediately
@@ -24,17 +24,17 @@ self.addEventListener( 'install', function( event ){
         self.skipWaiting( );
       })
       .catch( function( ){
-        console.log("Error skipWaiting");
+        showMsg("Error skipWaiting");
       })
   );        
 });
 
 self.addEventListener('fetch', function(event) {
-  console.log("fetched request: ", event.request);    
+  showMsg("fetched request: ", event.request);    
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
-      	console.log("caching match: ", response);
+      	showMsg("caching match: ", response);
         // Cache hit - return response
         if (response) {
           return response;
@@ -62,7 +62,7 @@ self.addEventListener( 'activate', function( event ){
       .then( function( keyList ){
         return Promise.all( keyList.map( function( key ){
           if ( cacheWhitelist.indexOf( key ) === -1 ){
-            console.log( "Deleting cache: ", CACHE_NAME, key );
+            showMsg( "Deleting cache: ", CACHE_NAME, key );
             return caches.delete(key);
           }
         }));
@@ -75,12 +75,12 @@ self.addEventListener( 'activate', function( event ){
         //window.location.reload( true );
       })
       .catch( function( ){
-        console.log("error during activation");
+        showMsg("error during activation");
       })
   );
 });
 
 //self.addEventListener('push', function(event) {
-//  console.log('Push message received', event);
+//  showMsg('Push message received', event);
   // TODO
 //});

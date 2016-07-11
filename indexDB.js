@@ -33,12 +33,12 @@ function deleteIndexDB( ) {
   var objectStore = transaction.objectStore( dbStore );
   var request = objectStore.clear( );
   request.onsuccess = function( event ) {
-    console.log( "objectStore cleared" );
+    showMsg( "objectStore cleared" );
     updateSelect( [noIDBdata] );
   }
 
   transaction.oncomplete = function( event ){
-  	console.log("deleteIndexDB completed successfully");
+  	showMsg("deleteIndexDB completed successfully");
   };
 
   transaction.onerror = function( event ){
@@ -62,7 +62,7 @@ function updateIndexDB( projectData ){
   };
   
   transaction.oncomplete = function( event ){
-  	console.log("updateIndexDB completed successfully");
+  	showMsg("updateIndexDB completed successfully");
   };
 
   transaction.onerror = function( event ){
@@ -94,7 +94,7 @@ function getProjectsData( ) {
 	  //     fromIdbProjects.push( cursor.value );
 	  //     cursor.continue( );
 	  //   } else {
-	  //     console.log( "IndexDB read completed" );
+	  //     showMsg( "IndexDB read completed" );
 	  //     return( fromIdbProjects );
 	  //   }
 	  // };
@@ -102,7 +102,7 @@ function getProjectsData( ) {
 	  // 	return [];
 	  // }
 	  // transaction.oncomplete = function( event ) {
-	  //   console.log( "getProjectsData completed" );
+	  //   showMsg( "getProjectsData completed" );
 	  // };
 
 	  // transaction.onerror = function( event ) {
@@ -122,7 +122,7 @@ window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || 
 window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
 
 if ( !window.indexedDB ) {
-  console.log( "This browser doesn't support a stable version of IndexedDB. Offline features will not be available." );
+  showMsg( "This browser doesn't support a stable version of IndexedDB. Offline features will not be available." );
 }
 
 // Define variables to be used for the prototype
@@ -130,7 +130,7 @@ var db;
 var request = window.indexedDB.open( dbName, dbVersion );
 
 request.onerror = function( event ) {
-  console.log( "Error creating the database: ", event.target );
+  showMsg( "Error creating the database: ", event.target );
 };
 request.onsuccess = function( event ) {
   db = event.target.result;
@@ -148,14 +148,14 @@ request.onsuccess = function( event ) {
       iDBprjData.push( cursor.value );
       cursor.continue( );
     } else {
-      console.log( "No more entries!" );
+      showMsg( "No more entries!" );
     }
   };
 
   // Do something when all the data is added to the database.
   transaction.oncomplete = function( event ) {
     //updateSelect( fromIdbProjects );
-    console.log( "DB store successfully read", event.target );
+    showMsg( "DB store successfully read", event.target );
   };
 
   transaction.onerror = function( event ) {
@@ -186,7 +186,7 @@ request.onupgradeneeded = function( event ) {
   // Use transaction oncomplete to make sure the objectStore creation is 
   // finished before adding data into it.
   objectStore.transaction.oncomplete = function( event ) {
-    console.log( "new IndexexDB succesfully created" );
+    showMsg( "new IndexexDB succesfully created" );
   };
 
   objectStore.transaction.onerror = function( event ) {
