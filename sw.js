@@ -3,7 +3,6 @@ const version = '19';
 
 var CACHE_NAME = 'protCache';
 var urlsToCache = [
-  '/',
   '/index.html',
   '/combined.js',
   '/offline.jpg',
