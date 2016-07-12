@@ -3,10 +3,11 @@ const version = '19';
 
 var CACHE_NAME = 'protCache';
 var urlsToCache = [
-  'index.html',
-  'combined.js',
-  'offline.jpg',
-  'indexDB.js'
+  '/',
+  '/index.html',
+  '/combined.js',
+  '/offline.jpg',
+  '/indexDB.js'
 ];
 
 // Warning. Service Workers do not have access to the DOM, so window.alert is not allowed
