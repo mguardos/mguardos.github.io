@@ -17,7 +17,7 @@ function initializeSelect(){
 function updateSelect( arrayProjects ) {
   var selElement = document.querySelector( "#projectSel" );
   selElement.innerHTML = "";
-  for ( item of arrayProjects ) {
+  for ( let item of arrayProjects ) {
     var opt = document.createElement( "option" );
     opt.value = item.id;
     opt.innerHTML = item.text; // whatever property it has
