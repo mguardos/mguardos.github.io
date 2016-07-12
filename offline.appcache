@@ -1,9 +1,12 @@
 CACHE MANIFEST
-# AppCacheV4
-index.html
-combined.js
-offline.jpg
-logo.png
+# AppCacheV5
+/
+/index.html
+/combined.js
+/indexDB.js
+/offline.jpg
+/logo.png
+/load-appcache.html
 
 NETWORK
 *
