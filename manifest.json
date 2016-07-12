@@ -1,9 +1,9 @@
 {
   "lang": "en",
   "dir": "ltr",
-  "name": "BeeBole offline sandboxing",
+  "name": "Offline sandboxing",
   "description": "Playing around with offline experience",
-  "short_name": "BeeBole Offline test",
+  "short_name": "Offline test",
 	"icons": [
 	    {
 	      "src":"logo.png",

@@ -13,7 +13,10 @@ console.log('%cHello', element);
 function showMsg(message, dyn){
   if (!dyn)
       dyn = '';
-  if (consoleOpen)
+  // Check Chrome console
+  if ((consoleOpen) 
+    // and Firefox console
+    || (window.console && window.console.firebug))
     console.log(message, dyn);
   else
     window.alert(message + ' - ' + dyn);

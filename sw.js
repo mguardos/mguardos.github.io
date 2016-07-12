@@ -9,13 +9,15 @@ var urlsToCache = [
   'indexDB.js'
 ];
 
+// Warning. Service Workers do not have access to the DOM, so window.alert is not allowed
+
 // Set the callback for the install step
 self.addEventListener( 'install', function( event ){
     // Perform install steps
     event.waitUntil(
     caches.open( CACHE_NAME )
       .then( function( cache ) {
-        showMsg( 'Opened cache: ', CACHE_NAME );
+        console.log( 'Opened cache: ', CACHE_NAME );
         return cache.addAll( urlsToCache );
       })
       // The following call will activate the new Service Worker immediately
@@ -23,18 +25,18 @@ self.addEventListener( 'install', function( event ){
       .then( function( ){
         self.skipWaiting( );
       })
-      .catch( function( ){
-        showMsg("Error skipWaiting");
+      .catch( function( e ){
+        console.log("Error skipWaiting", e);
       })
   );        
 });
 
 self.addEventListener('fetch', function(event) {
-  showMsg("fetched request: ", event.request);    
+  console.log("fetched request: ", event.request);    
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
-      	showMsg("caching match: ", response);
+      	console.log("caching match: ", response);
         // Cache hit - return response
         if (response) {
           return response;
@@ -62,7 +64,7 @@ self.addEventListener( 'activate', function( event ){
       .then( function( keyList ){
         return Promise.all( keyList.map( function( key ){
           if ( cacheWhitelist.indexOf( key ) === -1 ){
-            showMsg( "Deleting cache: ", CACHE_NAME, key );
+            console.log( "Deleting cache: ", CACHE_NAME, key );
             return caches.delete(key);
           }
         }));
@@ -75,12 +77,12 @@ self.addEventListener( 'activate', function( event ){
         //window.location.reload( true );
       })
       .catch( function( ){
-        showMsg("error during activation");
+        console.log("error during activation");
       })
   );
 });
 
 //self.addEventListener('push', function(event) {
-//  showMsg('Push message received', event);
+//  console.log('Push message received', event);
   // TODO
 //});
