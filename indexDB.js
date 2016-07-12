@@ -17,10 +17,10 @@ function initializeSelect(){
 function updateSelect( arrayProjects ) {
   var selElement = document.querySelector( "#projectSel" );
   selElement.innerHTML = "";
-  for ( let item of arrayProjects ) {
+  for ( var z=0; z<arrayProjects.length; z++ ) {
     var opt = document.createElement( "option" );
-    opt.value = item.id;
-    opt.innerHTML = item.text; // whatever property it has
+    opt.value = arrayProjects[z].id;
+    opt.innerHTML = arrayProjects[z].text; // whatever property it has
 
     // then append it to the select element
     selElement.appendChild( opt );
