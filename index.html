@@ -1,53 +1,62 @@
 <!DOCTYPE html>
-<html lang="en" manifest="offline.appcache">
-  <head>
-    <!-- Required meta tags-->
-    <meta charset="utf-8">
-    <meta name="author" content="mguardos">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="theme-color" content="#536878" />
-    <link rel=manifest href="manifest.json">
-    <!-- Your app title -->
-    <title>Prototype - Cache</title>
-  </head>
-  <body onload="retrieveLocalStorage()">
-  	<h1>Loading big image below</h1>
-    <img src="happyMexican.jpg" width="300" height="300">
-    <form name="daysForm" style="padding:10px">
-      <fieldset>
-        <legend>Local Storage</legend>
-        <label>Comment: <input type="text" name="textField1"></label>
-        <label>Hours: <input type="number" name="numericField1"></label>
-        <label>Date: <input type="date" name="dateField1"></label>
-        <div  style="padding:10px">
-          <button type="button" onclick="daysForm.reset()">Clean form</button>
-          <button type="button" onclick="saveLocalStorage()">LocalStorage save</button>
-          <button type="button" onclick="retrieveLocalStorage()">LocalStorage retrieve</button>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Indexed DB</legend>
-            <label>Project: <select id="projectSel">
-            </select></label>
-        <div  style="padding:10px">
-          <button type="button" onclick="deleteIndexDB()">Delete IndexDB</button>
-          <button type="button" onclick="initializeSelect()">Fill Select (1.Network, 2.IndexDB)</button>
-        </div>
-      </fieldset>
-    </form>
-  	<script src="./combined.js"></script>
-    <script src="./indexDB.js"></script>
-    <script src="https://mguardos.github.io/projectList.js"></script>
-    <!--script src="./projectList.js"></script-->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<html lang="en" manifest="html5demo.appcache">
+<head>
+<meta charset=utf-8>
+<meta name="viewport" content="width=620">
+<title>HTML5 Demo: Offline Application: using manifest</title>
+<link rel="stylesheet" href="css/html5demos.css">
+</head>
+<body>
+<section id="wrapper">
+    <header>
+      <h1>Offline Application: using manifest</h1>
+    </header>
+<meta name="viewport" content="width=620" />
 
-      ga('create', 'UA-80629916-1', 'auto');
-      ga('send', 'pageview');
+<script src="/js/h5utils-offline.js"></script>
+    <article>
+      <p>A good working example is to load this demo up, then disconnection your web connection - the page will still reload. In addition, try this on an iPhone, then set your iPhone to flight mode, and refresh: the page loads.</p>
+      <p>Status of cache: </p>
+      <p id="status">checking...</p>
+      <p><input type="button" id="update" value="Update cache status" /></p>
+      <p><input type="button" id="swap" value="Update cache to latest" /></p>
+    </article>
+<script>
 
-    </script>
-	</body>
+var cacheStates = ["UNCACHED (numeric value 0) -- The ApplicationCache object's cache host is not associated with an application cache at this time.",
+"IDLE (numeric value 1) -- The ApplicationCache object's cache host is associated with an application cache whose application cache group's update status is idle, and that application cache is the newest cache in its application cache group, and the application cache group is not marked as obsolete.",
+"CHECKING (numeric value 2) -- The ApplicationCache object's cache host is associated with an application cache whose application cache group's update status is checking.",
+"DOWNLOADING (numeric value 3) -- The ApplicationCache object's cache host is associated with an application cache whose application cache group's update status is downloading.",
+"UPDATEREADY (numeric value 4) -- The ApplicationCache object's cache host is associated with an application cache whose application cache group's update status is idle, and whose application cache group is not marked as obsolete, but that application cache is not the newest cache in its group.",
+"OBSOLETE (numeric value 5) -- The ApplicationCache object's cache host is associated with an application cache whose application cache group is marked as obsolete."];
+
+function updateCacheStatus() {
+  document.querySelector('#status').innerHTML = cacheStates[window.applicationCache.status];
+}
+
+addEvent(document.querySelector('#update'), 'click', function () {
+  window.applicationCache.update();
+});
+
+addEvent(document.querySelector('#swap'), 'click', function () {
+  window.applicationCache.swapCache();
+});
+
+var events = "checking,error,noupdate,downloading,progress,updateready,cached,obsolete".split(',');
+var i = events.length;
+
+while (i--) {
+  addEvent(window.applicationCache, events[i], updateCacheStatus);
+}
+
+</script>
+<a id="html5badge" href="http://www.w3.org/html/logo/">
+<img src="http://www.w3.org/html/logo/badge/html5-badge-h-connectivity-device-graphics-multimedia-performance-semantics-storage.png" width="325" height="64" alt="HTML5 Powered with Connectivity / Realtime, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage" title="HTML5 Powered with Connectivity / Realtime, Device Access, Graphics, 3D &amp; Effects, Multimedia, Performance &amp; Integration, Semantics, and Offline &amp; Storage">
+</a>
+    <footer><a href="/">HTML5 demos</a>/<a id="built" href="http://twitter.com/rem">@rem built this</a>/<a href="#view-source">view source</a></footer> 
+</section>
+<a href="http://github.com/remy/html5demos"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<script src="js/prettify.packed.js"></script>
+</body>
 </html>
+

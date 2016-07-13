@@ -2,6 +2,7 @@ CACHE MANIFEST
 
 # AppCacheV6
 
+CACHE:
 index.html
 combined.js
 indexDB.js
