@@ -48,11 +48,11 @@ if ( !'serviceWorker' in navigator ) {
   // AppCache management
 } else if ('applicationCache' in window) {
   // Load iframe with appCache
-  let iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
-  iframe.src = 'load-appcache.html'
-  document.body.appendChild(iframe);
-  showMsg("Iframe loaded for AppCache management");
+  // let iframe = document.createElement('iframe');
+  // iframe.style.display = 'none';
+  // iframe.src = 'load-appcache.html'
+  // document.body.appendChild(iframe);
+  // showMsg("Iframe loaded for AppCache management");
 
 } else {
   showMsg("no service worker - no appCache");

@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# AppCacheV5
+# AppCacheV6
 /
 /index.html
 /combined.js
@@ -9,7 +9,8 @@ CACHE MANIFEST
 /load-appcache.html
 
 NETWORK
-*
+http://*
+https://*
 
 FALLBACK:
 / offline.jpg
