@@ -1,3 +1,4 @@
+// Version to debug cache issues :: V1
 // Hack to handle messages in console when possible and in browser when testing elsewhere
 // Detect whether Chrome dev tools is open
 var element = new Image();
