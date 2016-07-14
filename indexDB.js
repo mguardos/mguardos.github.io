@@ -148,7 +148,7 @@ request.onsuccess = function( event ) {
       iDBprjData.push( cursor.value );
       cursor.continue( );
     } else {
-      showMsg( "No more entries!" );
+      showMsg( "Stored indexedDB data into app variable" );
     }
   };
 
