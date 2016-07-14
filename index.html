@@ -8,11 +8,18 @@
     <meta name="theme-color" content="#536878" />
     <link rel=manifest href="manifest.json">
     <!-- Your app title -->
-    <title>BeeBole Prototype - Cache</title>
+    <title>Prototype - Cache</title>
   </head>
-  <body>
-  	<h1>Testing Caching - V14</h1>
+  <body onload="retrieveLocalStorage()">
+  	<h1>Testing Caching</h1>
     <img src="happyMexican.jpg" width="300" height="300">
+      <fieldset>
+        <legend>Instructions</legend>
+        <p>After page loads, go offline and refresh, you should see a cousin of Chrome's offline dinosaur replacing the smiley guy above</p>
+        <p>You can use the inputs below to test local storage and IndexedDB after and before offlining</p>
+        <h2>Parameters</h2>
+        <p><label>Popup alerts: <input id="popupAlerts" type="checkbox"></label></p>
+      </fieldset>
     <form name="daysForm" style="padding:10px">
       <fieldset>
         <legend>Local Storage</legend>

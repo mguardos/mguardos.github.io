@@ -1,23 +1,21 @@
 // Version to debug cache issues :: V1
 // Hack to handle messages in console when possible and in browser when testing elsewhere
 // Detect whether Chrome dev tools is open
-var element = new Image();
-var consoleOpen = false;
-Object.defineProperty(element, 'id', {
-  get: function () {
-    consoleOpen = true;
-  }
-});
-console.log('%cHello', element);
+// var element = new Image();
+// var consoleOpen = false;
+// Object.defineProperty(element, 'id', {
+//   get: function () {
+//     consoleOpen = true;
+//   }
+// });
+// console.log('%cHello', element);
 
 // Debuggin message to display messages during multi-browser testing
 function showMsg(message, dyn){
   if (!dyn)
       dyn = '';
-  // Check Chrome console
-  if ((consoleOpen) 
-    // and Firefox console
-    || (window.console && window.console.firebug))
+  // Check whether to display messages via console or window alert
+  if (!document.querySelector("#popupAlerts").selected)
     console.log(message, dyn);
   else
     window.alert(message + ' - ' + dyn);
@@ -49,6 +47,7 @@ if ( !'serviceWorker' in navigator ) {
   // AppCache management
 } else if ('applicationCache' in window) {
   // Load iframe with appCache
+  // As suggested by both Jake Archibald and Patrick Kettner
   let iframe = document.createElement('iframe');
   iframe.style.display = 'none';
   iframe.src = 'load-appcache.html'
@@ -80,5 +79,6 @@ function retrieveLocalStorage( ) {
     document.querySelector("input[name=dateField1]").value = data.date;
     document.querySelector("input[name=textField1]").value = data.comment || "";
   }
+  if localStorage.getItem("alertPopup") ? document.querySelector("#popupAlerts").selected = true;
 }
 
