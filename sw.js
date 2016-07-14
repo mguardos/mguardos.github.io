@@ -1,5 +1,5 @@
 // The files we want to cache
-const version = '25';
+const version = '26';
 
 var CACHE_NAME = 'protCache';
 var urlsToCache = [

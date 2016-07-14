@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# AppCacheV25
+# AppCacheV26
 
 CACHE:
 /
@@ -10,8 +10,7 @@ indexDB.js
 offline.jpg
 
 NETWORK:
-http://*
-https://*
+*
 
 FALLBACK:
 / offline.jpg
