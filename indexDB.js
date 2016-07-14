@@ -155,11 +155,11 @@ request.onsuccess = function( event ) {
   // Do something when all the data is added to the database.
   transaction.oncomplete = function( event ) {
     //updateSelect( fromIdbProjects );
-    showMsg( "DB store successfully read", event.target );
+    showMsg( "DB store successfully read - List of projects" );
   };
 
   transaction.onerror = function( event ) {
-    console.error( "Error creating list of projects", event.target );
+    console.error( "Error creating list of projects from IndexedDB", event.target );
   };
 
 };
@@ -190,6 +190,6 @@ request.onupgradeneeded = function( event ) {
   };
 
   objectStore.transaction.onerror = function( event ) {
-    console.error( "Error creating list of projects", event.target );
+    console.error( "Error creating list of projects into IndexedDB", event.target );
   };
 };
