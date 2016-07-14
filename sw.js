@@ -17,9 +17,9 @@ var urlsToCache = [
 self.addEventListener( 'install', function( event ){
     // Perform install steps
     event.waitUntil(
-    caches.open( CACHE_NAME )
+    caches.open( 'static-${version}' )
       .then( function( cache ) {
-        console.log( 'Opened cache: ', CACHE_NAME );
+        console.log( 'Opened cache: ', 'static-${version}' );
         return cache.addAll( urlsToCache );
       })
       // The following call will activate the new Service Worker immediately
@@ -59,14 +59,14 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener( 'activate', function( event ){
-  var cacheWhitelist = [CACHE_NAME];
+  var cacheWhitelist = ['static-${version}'];
 
   event.waitUntil(
     caches.keys( )
       .then( function( keyList ){
         return Promise.all( keyList.map( function( key ){
           if ( cacheWhitelist.indexOf( key ) === -1 ){
-            console.log( "Deleting cache: ", CACHE_NAME, key );
+            console.log( "Deleting cache: ", 'static-${version}', key );
             return caches.delete(key);
           }
         }));
