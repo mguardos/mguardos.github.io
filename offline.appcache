@@ -1,14 +1,12 @@
 CACHE MANIFEST
 
-# AppCacheV6
+# AppCacheV7
 
 CACHE:
-index.html
 combined.js
 indexDB.js
 offline.jpg
 logo.png
-load-appcache.html
 
 NETWORK:
 http://*
