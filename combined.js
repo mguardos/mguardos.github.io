@@ -15,10 +15,10 @@ function showMsg(message, dyn){
   if (!dyn)
       dyn = '';
   // Check whether to display messages via console or window alert
-  if (!document.querySelector("input[name=popupAlerts]").checked)
-    console.log(message, dyn);
-  else
+  if ((document.querySelector("input[name=popupAlerts]").checked) || ((JSON.parse(localStorage.getItem("dataLS"))) && (Boolean(JSON.parse(localStorage.getItem("dataLS")).value).popupAlerts)))
     window.alert(message + ' - ' + dyn);
+  else
+    console.log(message, dyn);
 }
 // End of browser testing hack
 
