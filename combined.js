@@ -23,7 +23,7 @@ function showMsg(message, dyn){
 // End of browser testing hack
 
 // Create service worker
-if ( !'serviceWorker' in navigator ) {
+if ( 'serviceWorker' in navigator ) {
   // $$$$$ Change path and location for sw.js to propefly cache common files from the root
   navigator.serviceWorker.register( 'sw.js' ).then( function( registration ) {
     // Registration was successful
