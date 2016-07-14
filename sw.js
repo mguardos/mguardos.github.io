@@ -1,8 +1,9 @@
 // The files we want to cache
-const version = '28';
+const version = '29';
 
-var CACHE_NAME = 'protCache';
+var CACHE_NAME = 'static-' + version;
 var urlsToCache = [
+  '/',
   '/index.html',
   '/combined.js',
   '/offline.jpg',
@@ -17,9 +18,9 @@ var urlsToCache = [
 self.addEventListener( 'install', function( event ){
     // Perform install steps
     event.waitUntil(
-    caches.open( 'static-${version}' )
+    caches.open( CACHE_NAME )
       .then( function( cache ) {
-        console.log( 'Opened cache: ', 'static-${version}' );
+        console.log( 'Opened cache: ', CACHE_NAME );
         return cache.addAll( urlsToCache );
       })
       // The following call will activate the new Service Worker immediately
@@ -59,14 +60,14 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener( 'activate', function( event ){
-  var cacheWhitelist = ['static-${version}'];
+  var cacheWhitelist = [CACHE_NAME];
 
   event.waitUntil(
     caches.keys( )
       .then( function( keyList ){
         return Promise.all( keyList.map( function( key ){
           if ( cacheWhitelist.indexOf( key ) === -1 ){
-            console.log( "Deleting cache: ", 'static-${version}', key );
+            console.log( "Deleting cache: ", CACHE_NAME, key );
             return caches.delete(key);
           }
         }));
