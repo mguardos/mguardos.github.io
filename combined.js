@@ -49,7 +49,7 @@ if ( 'serviceWorker' in navigator ) {
 } else if ('applicationCache' in window) {
   // Load iframe with appCache
   // As suggested by both Jake Archibald and Patrick Kettner
-  let iframe = document.createElement('iframe');
+  var iframe = document.createElement('iframe');
   iframe.style.display = 'none';
   iframe.src = 'load-appcache.html'
   document.body.appendChild(iframe);
