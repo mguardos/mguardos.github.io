@@ -64,7 +64,7 @@ function saveLocalStorage( ) {
     hours: document.querySelector("input[name=numericField1]").value,
     date: document.querySelector("input[name=dateField1]").value,
     comment: document.querySelector("input[name=textField1]").value,
-    popupAlerts: document.querySelector("input[name=popupAlerts]").value
+    popupAlerts: document.querySelector("input[name=popupAlerts]").checked
   }
   // it would be possible to find a unique id for object to be saved
   // user + project + day or something like that
@@ -79,7 +79,7 @@ function retrieveLocalStorage( ) {
     document.querySelector("input[name=numericField1]").value = data.hours || "0";
     document.querySelector("input[name=dateField1]").value = data.date;
     document.querySelector("input[name=textField1]").value = data.comment || "";
-    document.querySelector("input[name=popupAlerts]").value = data.popupAlerts || false;
+    document.querySelector("input[name=popupAlerts]").checked = Boolean.(data.popupAlerts) || false;
   }
 }
 
