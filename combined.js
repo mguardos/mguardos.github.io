@@ -79,7 +79,7 @@ function retrieveLocalStorage( ) {
     document.querySelector("input[name=numericField1]").value = data.hours || "0";
     document.querySelector("input[name=dateField1]").value = data.date;
     document.querySelector("input[name=textField1]").value = data.comment || "";
-    document.querySelector("input[name=popupAlerts]").checked = Boolean.(data.popupAlerts) || false;
+    document.querySelector("input[name=popupAlerts]").checked = Boolean(data.popupAlerts) || false;
   }
 }
 
