@@ -1,8 +1,9 @@
 CACHE MANIFEST
 
-# AppCacheV10
+# AppCacheV11
 
 CACHE:
+index.html
 combined.js
 indexDB.js
 offline.jpg
