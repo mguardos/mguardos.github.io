@@ -1,14 +1,15 @@
 CACHE MANIFEST
 
-# AppCacheV8
+# AppCacheV9
 
 CACHE:
 combined.js
 indexDB.js
 offline.jpg
-logo.png
 
 NETWORK:
 http://*
 https://*
 
+FALLBACK:
+/ offline.jpg
