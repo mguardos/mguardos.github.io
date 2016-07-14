@@ -1,5 +1,5 @@
 // The files we want to cache
-const version = '26';
+const version = '27';
 
 var CACHE_NAME = 'protCache';
 var urlsToCache = [
@@ -7,7 +7,9 @@ var urlsToCache = [
   '/index.html',
   '/combined.js',
   '/offline.jpg',
-  '/indexDB.js'
+  '/indexDB.js',
+  '/favicon.ico',
+  '/logo.png'
 ];
 
 // Warning. Service Workers do not have access to the DOM, so window.alert is not allowed
