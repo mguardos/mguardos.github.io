@@ -15,7 +15,7 @@ function showMsg(message, dyn){
   if (!dyn)
       dyn = '';
   // Check whether to display messages via console or window alert
-  if (!document.querySelector("#popupAlerts").selected)
+  if (!document.querySelector("input[name=popupAlerts]").checked)
     console.log(message, dyn);
   else
     window.alert(message + ' - ' + dyn);
