@@ -1,8 +1,9 @@
 CACHE MANIFEST
 
-# AppCacheV30
+# AppCacheV31
 
 CACHE:
+/
 index.html
 combined.js
 indexDB.js
