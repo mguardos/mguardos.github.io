@@ -1,5 +1,5 @@
 // The files we want to cache
-const version = '36';
+const version = '37';
 
 var CACHE_NAME = 'static-' + version;
 var urlsToCache = [
