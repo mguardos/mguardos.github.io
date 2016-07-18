@@ -1,15 +1,15 @@
 // The files we want to cache
-const version = '35';
+const version = '36';
 
 var CACHE_NAME = 'static-' + version;
 var urlsToCache = [
-  '/',
-  '/index.html',
-  '/combined.js',
-  '/offline.jpg',
-  '/indexDB.js',
-  '/favicon.ico',
-  '/logo.png'
+  '.',
+  'index.html',
+  'combined.js',
+  'offline.jpg',
+  'indexDB.js',
+  'favicon.ico',
+  'logo.png'
 ];
 
 // Warning. Service Workers do not have access to the DOM, so window.alert is not allowed
