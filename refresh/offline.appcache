@@ -1,0 +1,13 @@
+CACHE MANIFEST
+
+# AppCache - Refresh V35
+
+CACHE:
+/
+index.html
+refresh.js
+
+NETWORK:
+*
+
+FALLBACK:
