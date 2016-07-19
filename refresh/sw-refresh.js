@@ -1,5 +1,5 @@
 // The files we want to cache
-const version = '31';
+const version = '37';
 
 var CACHE_NAME = 'refresh-' + version;
 var urlsToCache = [
