@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-green.min.css">
+  <link rel="stylesheet" href="/styles.css">
+	<style>
+	</style>
+</head>
+<body>
+	<main class="mdl-layout__content">
+    <div class="title mdl-color-text--grey-600">
+      <div class="subTitle mdl-typography--display-2">GDrive Integration</div> 
+    </div>
+  </main>
+	  <div class="centralized mdl-card mdl-shadow--2dp">
+		  <div class="mdl-card__title">
+		    <h2 class="mdl-card__title-text">File content</h2>
+		  </div>
+		  <div class="logger mdl-card__supporting-text">
+		    File is not yet retrieved
+		  </div>
+		  <div class="mdl-card__actions mdl-card--border">
+		    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"  onclick="trySampleRequest()">Get File</a>
+		  </div>
+		</div>
+	<script>
+	  var queryString = location.hash.substring(1),
+	  		client_id = '129908200138-vmcmdpsbsoga8sbomm1fhbvi6e64q6jp.apps.googleusercontent.com';
+
+	  // Parse query string to see if page request is coming from OAuth 2.0 server.
+	  var params = {};
+	  var regex = /([^&=]+)=([^&]*)/g, m;
+	  while (m = regex.exec(queryString)) {
+	    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+	    // Try to exchange the param values for an access token.
+	    exchangeOAuth2Token(params);
+	  }
+
+	  // If there's an access token, try an API request.
+	  // Otherwise, start OAuth 2.0 flow.
+	  function trySampleRequest() {
+	    var params = JSON.parse(localStorage.getItem('oauth2-test-params'));
+	    if (params && params['access_token']) {
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('GET',
+	          'https://www.googleapis.com/drive/v3/about?fields=user&' +
+	          //'https://www.googleapis.com/drive/v3/files/0ByjbbtM0lhevMlVHYVZuSE5wZkk&' +
+	          'access_token=' + params['access_token']);
+	      xhr.onreadystatechange = function (e) {
+	        console.log(xhr.response);
+	        document.querySelector( '.logger' ).innerHTML = xhr.response;
+	      };
+	      xhr.send(null);
+	    } else {
+	      oauth2SignIn();
+	    }
+	  }
+
+	  /*
+	   * Create form to request access token from Google's OAuth 2.0 server.
+	   */
+		function oauth2SignIn() {
+		  // Google's OAuth 2.0 endpoint for requesting an access token
+		  var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+		  // Create <form> element to submit parameters to OAuth 2.0 endpoint.
+		  var form = document.createElement('form');
+		  form.setAttribute('method', 'GET'); // Send as a GET request.
+		  form.setAttribute('action', oauth2Endpoint);
+
+		  // Parameters to pass to OAuth 2.0 endpoint.
+		  var params = {'client_id': client_id,
+		                'redirect_uri': 'http://127.0.0.1:9000/GDrive/',
+		                'response_type': 'token',
+		                'scope': 'https://www.googleapis.com/auth/drive.metadata.readonly',
+		                'include_granted_scopes': 'true',
+		                'state': 'pass-through value'};
+
+		  // Add form parameters as hidden input values.
+		  for (var p in params) {
+		    var input = document.createElement('input');
+		    input.setAttribute('type', 'hidden');
+		    input.setAttribute('name', p);
+		    input.setAttribute('value', params[p]);
+		    form.appendChild(input);
+		  }
+
+		  // Add form to page and submit it to open the OAuth 2.0 endpoint.
+		  document.body.appendChild(form);
+		  form.submit();
+		}
+
+	  /* Verify the access token received on the query string. */
+	  function exchangeOAuth2Token(params) {
+	    var oauth2Endpoint = 'https://www.googleapis.com/oauth2/v3/tokeninfo';
+	    if (params['access_token']) {
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('POST', oauth2Endpoint + '?access_token=' + params['access_token']);
+	      xhr.onreadystatechange = function (e) {
+	        var response = JSON.parse(xhr.response);
+	        // When request is finished, verify that the 'aud' property in the
+	        // response matches YOUR_CLIENT_ID.
+	        if (xhr.readyState == 4 &&
+	            xhr.status == 200 &&
+	            response['aud'] &&
+	            response['aud'] == client_id) {
+	          // Store granted scopes in local storage to facilitate
+	          // incremental authorization.
+	          params['scope'] = response['scope'];
+	          localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
+	          if (params['state'] == 'try_sample_request') {
+	            trySampleRequest();
+	          }
+	        } else if (xhr.readyState == 4) {
+	          console.log('There was an error processing the token, another ' +
+	                      'response was returned, or the token was invalid.')
+	        }
+	      };
+	      xhr.send(null);
+	    }
+	  }		
+	</script>
+</body>
+</html>
