@@ -22,12 +22,88 @@
 		    File is not yet retrieved
 		  </div>
 		  <div class="mdl-card__actions mdl-card--border">
-		    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"  onclick="trySampleRequest()">Get File</a>
+		    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"  onclick="getFileContent()">Get File</a>
 		  </div>
 		</div>
 	<script>
 	  var queryString = location.hash.substring(1),
-	  		client_id = '129908200138-vmcmdpsbsoga8sbomm1fhbvi6e64q6jp.apps.googleusercontent.com';
+	  		api_key = 'AIzaSyB1hpAhtNad5NIYW_iMiuNBP2AIuCmyZjk',
+	   		client_id = '129908200138-vmcmdpsbsoga8sbomm1fhbvi6e64q6jp.apps.googleusercontent.com',
+	   		scopes = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+
+	 //  /**
+  //    *  On load, called to load the auth2 library and API client library.
+  //    */
+  //   function handleClientLoad() {
+  //     gapi.load('client:auth2', initClient);
+  //   }
+
+		// /**
+  //    *  Called when the signed in status changes, to update the UI
+  //    *  appropriately. After a sign-in, the API is called.
+  //    */
+  //   function updateSigninStatus(isSignedIn) {
+  //     if (isSignedIn) {
+  //       listFiles();
+  //     } else {
+  //     }
+  //   }
+
+		// /**
+  //    *  Initializes the API client library and sets up sign-in state
+  //    *  listeners.
+  //    */
+  //   function initClient() {
+  //     gapi.client.init({
+  //       apiKey: api_key,
+  //       clientId: client_id,
+  //       scope: scopes
+  //     }).then(function () {
+  //       // Listen for sign-in state changes.
+  //       gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+  //       // Handle the initial sign-in state.
+  //       //updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+  //       //authorizeButton.onclick = handleAuthClick;
+  //       //signoutButton.onclick = handleSignoutClick;
+  //     });
+  //   }
+
+		// /**
+  //    * Append a pre element to the body containing the given message
+  //    * as its text node. Used to display the results of the API call.
+  //    *
+  //    * @param {string} message Text to be placed in pre element.
+  //    */
+  //   function appendPre(message) {
+  //     var pre = document.querySelector( '.logger' );
+  //     var textContent = document.createTextNode(message + '\n');
+  //     pre.appendChild(textContent);
+  //   }
+
+  //   function signIn() {
+  //   	gapi.auth2.getAuthInstance().signIn();
+  //   }
+		// /**
+  //    * Print files.
+  //    */
+  //   function listFiles() {
+  //     gapi.client.drive.files.list({
+  //       'pageSize': 10,
+  //       'fields': "nextPageToken, files(id, name)"
+  //     }).then(function(response) {
+  //       appendPre('Files:');
+  //       var files = response.result.files;
+  //       if (files && files.length > 0) {
+  //         for (var i = 0; i < files.length; i++) {
+  //           var file = files[i];
+  //           appendPre(file.name + ' (' + file.id + ')');
+  //         }
+  //       } else {
+  //         appendPre('No files found.');
+  //       }
+  //     });
+  //   }
 
 	  // Parse query string to see if page request is coming from OAuth 2.0 server.
 	  var params = {};
@@ -40,13 +116,14 @@
 
 	  // If there's an access token, try an API request.
 	  // Otherwise, start OAuth 2.0 flow.
-	  function trySampleRequest() {
+	  function getFileContent() {
 	    var params = JSON.parse(localStorage.getItem('oauth2-test-params'));
 	    if (params && params['access_token']) {
 	      var xhr = new XMLHttpRequest();
 	      xhr.open('GET',
-	          'https://www.googleapis.com/drive/v3/about?fields=user&' +
-	          //'https://www.googleapis.com/drive/v3/files/0ByjbbtM0lhevMlVHYVZuSE5wZkk&' +
+	          //'https://www.googleapis.com/drive/v3/about?fields=user&' +
+	          //'https://www.googleapis.com/drive/v3/files/0ByjbbtM0lhevMlVHYVZuSE5wZkk?alt=media&' +
+	          'https://www.googleapis.com/drive/v3/files/0ByjbbtM0lhevMlVHYVZuSE5wZkk?alt=media&' +
 	          'access_token=' + params['access_token']);
 	      xhr.onreadystatechange = function (e) {
 	        console.log(xhr.response);
@@ -72,9 +149,9 @@
 
 		  // Parameters to pass to OAuth 2.0 endpoint.
 		  var params = {'client_id': client_id,
-		                'redirect_uri': 'http://127.0.0.1:9000/GDrive/',
+		                'redirect_uri': window.location.href,
 		                'response_type': 'token',
-		                'scope': 'https://www.googleapis.com/auth/drive.metadata.readonly',
+		                'scope': 'https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.readonly',
 		                'include_granted_scopes': 'true',
 		                'state': 'pass-through value'};
 
@@ -99,7 +176,7 @@
 	      var xhr = new XMLHttpRequest();
 	      xhr.open('POST', oauth2Endpoint + '?access_token=' + params['access_token']);
 	      xhr.onreadystatechange = function (e) {
-	        var response = JSON.parse(xhr.response);
+	        var response = xhr.response ? JSON.parse(xhr.response) : '';
 	        // When request is finished, verify that the 'aud' property in the
 	        // response matches YOUR_CLIENT_ID.
 	        if (xhr.readyState == 4 &&
