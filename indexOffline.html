@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="offline.appcache">
   <head>
     <!-- Required meta tags-->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -67,25 +67,25 @@
         //   });
         // });
 
-      } else  if ('applicationCache' in window) {
-        var iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = 'load-appcache.html';
-        document.body.appendChild(iframe);
+      // } else  if ('applicationCache' in window) {
+      //   var iframe = document.createElement('iframe');
+      //   iframe.style.display = 'none';
+      //   iframe.src = 'load-appcache.html';
+      //   document.body.appendChild(iframe);
 
-        //Check if a new cache is available on page load.
-        window.addEventListener('load', function( ) {
-          window.applicationCache.addEventListener('updateready', function( ) {
-            if (window.applicationCache.status === window.applicationCache.UPDATEREADY) {
-                window.applicationCache.swapCache();
-                //$m.hashMgr.addHash();
-                window.location.reload( true );
-            } else {
-              // Manifest didn't changed. Nothing new to server.
-            }
-          }, false);
+      //   //Check if a new cache is available on page load.
+      //   window.addEventListener('load', function( ) {
+      //     window.applicationCache.addEventListener('updateready', function( ) {
+      //       if (window.applicationCache.status === window.applicationCache.UPDATEREADY) {
+      //           window.applicationCache.swapCache();
+      //           //$m.hashMgr.addHash();
+      //           window.location.reload( true );
+      //       } else {
+      //         // Manifest didn't changed. Nothing new to server.
+      //       }
+      //     }, false);
 
-        }, false);
+      //   }, false);
 
       }
     </script>
