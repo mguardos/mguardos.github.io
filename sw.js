@@ -2,8 +2,7 @@
 var FILES_CACHE = 'offlineBunnies';
 
 // You can specify elements to be precached. They can be cached when installing the SW
-var urlsToCache = [ 'index.html',
-                    '.',  
+var urlsToCache = [ 'indexOffline.html',
                     'img/bunny1.jpg',
                     'img/bunny2.jpg',
                     'img/bunny3.jpg' ];
