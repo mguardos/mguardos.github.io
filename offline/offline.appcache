@@ -1,9 +1,10 @@
 CACHE MANIFEST
 
-# BeeBole Mobile AppCache v3
+# BeeBole Mobile AppCache v4
 
 CACHE:
 .
+../.
 index.html
 img/bunny1.jpg
 img/bunny2.jpg
