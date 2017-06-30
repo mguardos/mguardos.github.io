@@ -1,15 +1,11 @@
 CACHE MANIFEST
 
-# BeeBole Mobile AppCache v4
+# BeeBole Mobile AppCache v5
 
 CACHE:
-.
-../.
-index.html
 img/bunny1.jpg
 img/bunny2.jpg
 img/bunny3.jpg
-load-appcache.html
 favicon.ico
 
 NETWORK:
