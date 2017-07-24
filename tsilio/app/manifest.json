@@ -1,0 +1,19 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "name": "Tsilio",
+  "description": "Check list: Shopping, TODOs ...",
+  "background_color": "#666666",
+  "theme_color": "#666666",
+  "short_name": "Tsilio",
+	"icons": [
+	    {
+	      "src":"img/niceday.png",
+	      "sizes": "144x144",
+	      "type": "image/png"
+	    }
+	  ],
+	"start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait"
+}

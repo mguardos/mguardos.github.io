@@ -1,0 +1,23 @@
+CACHE MANIFEST
+
+# Niceday List AppCache V0.5.2
+
+CACHE:
+.
+favicon.ico
+index.html
+load-appcache.html
+niceday.css
+js/idb.js
+js/labels.js
+js/niceday.js
+js/pure.js
+https://fonts.googleapis.com/icon?family=Material+Icons
+https://code.getmdl.io/1.3.0/material.teal-green.min.css
+https://code.getmdl.io/1.3.0/material.min.js
+
+NETWORK:
+*
+
+FALLBACK:
+/ img/offline.png
