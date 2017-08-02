@@ -1,10 +1,9 @@
 CACHE MANIFEST
 
-# Tsilio List AppCache V2017-08-02T17:00
+# Tsilio List AppCache V2017-08-02T17:20
 
 CACHE:
 .
-../.
 index.html
 load-appcache.html
 ../favicon.ico
@@ -14,6 +13,8 @@ js/labels.js
 js/tsilio.js
 js/pure.js
 ../iconfonts/MaterialIcons-Regular.woff
+https://code.getmdl.io/1.3.0/material.teal-green.min.css
+https://code.getmdl.io/1.3.0/material.min.js
 
 NETWORK:
 *
