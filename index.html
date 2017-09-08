@@ -2,6 +2,9 @@
     var el,
         lang = ( navigator.language || navigator.userLanguage || 'en' ).substr(0,2),
         iLabels = document.querySelectorAll( '.toTranslate' );
+    if ( !labels[lang] ) {
+      lang = 'en';
+    }
     iLabels.forEach(function(el) {
       el.innerHTML = labels[lang][el.innerHTML];
     });
